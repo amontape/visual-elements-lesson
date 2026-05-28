@@ -1,0 +1,1111 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ทัศนธาตุ | Visual Elements</title>
+  <style>
+    :root {
+      --ink: #14121f;
+      --muted: #696477;
+      --paper: #fbfaf7;
+      --panel: rgba(255,255,255,.78);
+      --line: rgba(20,18,31,.12);
+      --blue: #2457ff;
+      --pink: #f24f8d;
+      --yellow: #ffd33d;
+      --green: #19b986;
+      --shadow: 0 24px 70px rgba(17, 24, 39, .14);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 10%, rgba(255,211,61,.45), transparent 26rem),
+        radial-gradient(circle at 86% 0%, rgba(242,79,141,.32), transparent 28rem),
+        linear-gradient(135deg, #f7fbff 0%, #fbfaf7 48%, #fff5f7 100%);
+      font-family: "TH Sarabun New", "Noto Sans Thai", "Leelawadee UI", Tahoma, sans-serif;
+      line-height: 1.75;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px clamp(18px, 5vw, 72px);
+      border-bottom: 1px solid rgba(255,255,255,.45);
+      background: rgba(251, 250, 247, .74);
+      backdrop-filter: blur(22px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background: conic-gradient(from 160deg, var(--blue), var(--pink), var(--yellow), var(--green), var(--blue));
+      box-shadow: 0 14px 32px rgba(36,87,255,.24);
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      color: #383241;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+
+    .nav a:hover {
+      background: rgba(255,255,255,.72);
+      border-color: var(--line);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 86vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, .98fr);
+      gap: clamp(26px, 4vw, 70px);
+      align-items: center;
+      padding: clamp(42px, 8vw, 110px) clamp(20px, 6vw, 88px) 60px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 64%;
+      background:
+        linear-gradient(115deg, rgba(36,87,255,.98) 0%, rgba(135,85,255,.84) 34%, rgba(242,79,141,.78) 66%, rgba(255,211,61,.64) 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 58%, 0 88%);
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.16) 1px, transparent 1px);
+      background-size: 76px 76px;
+      mask-image: linear-gradient(#000, transparent 70%);
+      z-index: -1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.26);
+      color: white;
+      font-weight: 800;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.32);
+    }
+
+    .hero h1 {
+      margin: 22px 0 16px;
+      font-size: clamp(54px, 10vw, 132px);
+      line-height: .9;
+      letter-spacing: 0;
+      color: #100f1e;
+      max-width: 850px;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 720px;
+      font-size: clamp(20px, 2.2vw, 30px);
+      color: #4d465d;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 10px 18px;
+      border: 0;
+      border-radius: 999px;
+      background: #101828;
+      color: white;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 0 14px 30px rgba(16,24,40,.22);
+    }
+
+    .button.secondary {
+      color: #191628;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(20,18,31,.12);
+      box-shadow: none;
+    }
+
+    .hero-board {
+      position: relative;
+      min-height: 520px;
+    }
+
+    .floating-card {
+      position: absolute;
+      border-radius: 26px;
+      background: rgba(255,255,255,.76);
+      border: 1px solid rgba(255,255,255,.65);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      animation: floatIn .8s ease both;
+    }
+
+    .floating-card.main {
+      inset: 76px 4% auto 16%;
+      transform: rotate(-3deg);
+    }
+
+    .floating-card.side {
+      right: 0;
+      top: 12px;
+      width: 44%;
+      transform: rotate(4deg);
+      animation-delay: .12s;
+    }
+
+    .floating-card.bottom {
+      left: 2%;
+      bottom: 26px;
+      width: 48%;
+      transform: rotate(3deg);
+      animation-delay: .2s;
+    }
+
+    .floating-card img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+    }
+
+    @keyframes floatIn {
+      from { opacity: 0; translate: 0 24px; }
+      to { opacity: 1; translate: 0 0; }
+    }
+
+    main {
+      padding: 0 clamp(18px, 5vw, 72px) 80px;
+    }
+
+    .lesson-shell {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 26px;
+      align-items: start;
+    }
+
+    .side-rail {
+      position: sticky;
+      top: 82px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.68);
+      border: 1px solid rgba(20,18,31,.10);
+      box-shadow: 10px 10px 30px rgba(20,18,31,.08), -10px -10px 30px rgba(255,255,255,.72);
+      padding: 18px;
+    }
+
+    .side-rail h2 {
+      font-size: 20px;
+      margin: 0 0 12px;
+    }
+
+    .toc {
+      display: grid;
+      gap: 6px;
+    }
+
+    .toc a {
+      display: block;
+      text-decoration: none;
+      color: #544d61;
+      font-weight: 750;
+      padding: 8px 10px;
+      border-radius: 14px;
+    }
+
+    .toc a:hover {
+      color: var(--ink);
+      background: rgba(36,87,255,.08);
+    }
+
+    .section {
+      margin-bottom: 28px;
+      border-radius: var(--radius);
+      background: var(--panel);
+      border: 1px solid rgba(20,18,31,.10);
+      box-shadow: 14px 14px 38px rgba(20,18,31,.08), -16px -16px 44px rgba(255,255,255,.72);
+      overflow: hidden;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: end;
+      padding: clamp(22px, 4vw, 40px);
+      border-bottom: 1px solid rgba(20,18,31,.09);
+      background: linear-gradient(135deg, rgba(255,255,255,.78), rgba(255,255,255,.34));
+    }
+
+    .section-kicker {
+      color: var(--blue);
+      font-weight: 900;
+      font-size: 15px;
+      text-transform: uppercase;
+    }
+
+    .section h2 {
+      margin: 6px 0 0;
+      font-size: clamp(32px, 5vw, 66px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .section-count {
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      background: #101828;
+      color: #fff;
+      font-weight: 900;
+      box-shadow: 0 16px 36px rgba(16,24,40,.22);
+    }
+
+    .section-body {
+      display: grid;
+      gap: 24px;
+      padding: clamp(20px, 4vw, 40px);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .text-card, .visual-card, .note-card, .activity-card {
+      border-radius: 24px;
+      background: rgba(255,255,255,.66);
+      border: 1px solid rgba(20,18,31,.09);
+      box-shadow: inset 1px 1px 0 rgba(255,255,255,.7), 0 16px 36px rgba(20,18,31,.07);
+      overflow: hidden;
+    }
+
+    .text-card {
+      padding: clamp(20px, 3vw, 34px);
+    }
+
+    .text-card p {
+      margin: 0 0 16px;
+      font-size: clamp(19px, 1.7vw, 24px);
+      color: #322d40;
+    }
+
+    .text-card ul, .text-card ol {
+      margin: 0;
+      padding-left: 1.2em;
+      font-size: clamp(19px, 1.7vw, 24px);
+      color: #322d40;
+    }
+
+    .text-card li { margin: 0 0 12px; }
+
+    .visual-card {
+      position: relative;
+      cursor: zoom-in;
+    }
+
+    .visual-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      background: #eef1f4;
+    }
+
+    .visual-card.tall img {
+      aspect-ratio: 4 / 5;
+    }
+
+    .visual-caption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      font-weight: 800;
+      color: #3d3749;
+      background: rgba(255,255,255,.72);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #1d1a27;
+      background: rgba(36,87,255,.08);
+      border: 1px solid rgba(36,87,255,.14);
+      font-weight: 850;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .note-card, .activity-card {
+      padding: 22px;
+    }
+
+    .note-card h3, .activity-card h3 {
+      margin: 0 0 10px;
+      font-size: 25px;
+    }
+
+    .note-card p, .activity-card p {
+      margin: 0;
+      color: #4b455a;
+      font-size: 19px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .web-gallery {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+      .gallery .visual-card img {
+      aspect-ratio: 1 / 1;
+    }
+
+    .web-gallery .visual-card img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .caption-stack {
+      display: grid;
+      gap: 2px;
+    }
+
+    .caption-stack small {
+      color: var(--muted);
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .source-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 2px;
+    }
+
+    .source-list a {
+      text-decoration: none;
+      color: #2137a5;
+      font-weight: 850;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(36,87,255,.08);
+      border: 1px solid rgba(36,87,255,.14);
+    }
+
+    .full-text-frame {
+      width: 100%;
+      min-height: 620px;
+      border: 1px solid rgba(20,18,31,.10);
+      border-radius: 24px;
+      background: rgba(255,255,255,.72);
+      box-shadow: inset 1px 1px 0 rgba(255,255,255,.7), 0 16px 36px rgba(20,18,31,.07);
+    }
+
+    .quote-band {
+      border-radius: var(--radius);
+      padding: clamp(24px, 5vw, 54px);
+      margin: 28px 0;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(16,24,40,.96), rgba(36,87,255,.82)),
+        radial-gradient(circle at 78% 20%, rgba(242,79,141,.58), transparent 30rem);
+      box-shadow: var(--shadow);
+    }
+
+    .quote-band h2 {
+      margin: 0 0 10px;
+      font-size: clamp(36px, 6vw, 78px);
+      line-height: 1;
+    }
+
+    .quote-band p {
+      margin: 0;
+      max-width: 900px;
+      color: rgba(255,255,255,.82);
+      font-size: clamp(20px, 2vw, 28px);
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .answer {
+      margin-top: 14px;
+      display: none;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(25,185,134,.12);
+      color: #0d694d;
+      font-weight: 850;
+    }
+
+    .activity-card details {
+      margin-top: 14px;
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,.6);
+      border: 1px solid rgba(20,18,31,.10);
+    }
+
+    .activity-card summary {
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 26px;
+      background: rgba(10, 12, 22, .78);
+      backdrop-filter: blur(14px);
+    }
+
+    .modal.open { display: flex; }
+
+    .modal-inner {
+      width: min(1120px, 96vw);
+      max-height: 92vh;
+      border-radius: 24px;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 28px 90px rgba(0,0,0,.35);
+    }
+
+    .modal img {
+      width: 100%;
+      max-height: 82vh;
+      object-fit: contain;
+      background: #111827;
+    }
+
+    .modal-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 16px;
+      font-weight: 900;
+    }
+
+    .close {
+      border: 0;
+      border-radius: 999px;
+      width: 42px;
+      height: 42px;
+      background: #111827;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1060px) {
+      .hero, .lesson-shell, .content-grid { grid-template-columns: 1fr; }
+      .hero-board { min-height: 420px; }
+      .side-rail { position: relative; top: 0; }
+    }
+
+    @media (max-width: 720px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .hero { min-height: auto; padding-top: 36px; }
+      .hero-board { min-height: 300px; }
+      .floating-card.main { inset: 64px 0 auto 10%; }
+      .floating-card.side { width: 46%; }
+      .floating-card.bottom { width: 54%; }
+      .section-head { grid-template-columns: 1fr; }
+      .feature-grid, .gallery, .web-gallery, .compare { grid-template-columns: 1fr; }
+      .section-count { width: 54px; height: 54px; border-radius: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>ทัศนธาตุ 01</span></div>
+    <nav class="nav" aria-label="หัวข้อบทเรียน">
+      <a href="#meaning">ศิลปะ</a>
+      <a href="#form-content">รูปทรง/เนื้อหา</a>
+      <a href="#elements">ทัศนธาตุ</a>
+      <a href="#line">เส้น</a>
+      <a href="#value">น้ำหนัก</a>
+      <a href="#color">สี</a>
+      <a href="#space">ที่ว่าง</a>
+      <a href="#unity">เอกภาพ</a>
+      <a href="#web-examples">ภาพเพิ่ม</a>
+      <a href="#full-text">ข้อความครบ</a>
+      <a href="#activity">กิจกรรม</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Visual Elements • ม.6</span>
+      <h1>ทัศนธาตุ คือภาษาของงานศิลปะ</h1>
+      <p>บทเรียนนี้เรียบเรียงเนื้อหาจากสไลด์ครบทุกหน้า ให้ใช้เปิดสอนเรื่องความหมายของศิลปะ รูปทรง เนื้อหา จุด เส้น น้ำหนัก สี ลักษณะผิว ที่ว่าง และเอกภาพทางทัศนศิลป์</p>
+      <div class="hero-actions">
+        <a class="button" href="#meaning">เริ่มบทเรียน</a>
+        <a class="button secondary" href="#gallery">ดูภาพตัวอย่าง</a>
+      </div>
+    </div>
+    <div class="hero-board" aria-label="ภาพตัวอย่างจากบทเรียน">
+      <button class="floating-card main visual-card" data-full="visual-elements-pages/page-39.jpg" data-caption="ตัวอย่างด้านเส้น">
+        <img src="visual-elements-pages/page-39.jpg" alt="ตัวอย่างด้านเส้น">
+      </button>
+      <button class="floating-card side visual-card" data-full="visual-elements-pages/page-25.jpg" data-caption="วงล้อสี">
+        <img src="visual-elements-pages/page-25.jpg" alt="วงล้อสี">
+      </button>
+      <button class="floating-card bottom visual-card" data-full="visual-elements-pages/page-44.jpg" data-caption="ตัวอย่างลักษณะผิวและรูปทรง">
+        <img src="visual-elements-pages/page-44.jpg" alt="ตัวอย่างลักษณะผิวและรูปทรง">
+      </button>
+    </div>
+  </section>
+
+  <main>
+    <div class="lesson-shell">
+      <aside class="side-rail">
+        <h2>โครงบทเรียน</h2>
+        <div class="toc">
+          <a href="#meaning">1. ศิลปะคืออะไร</a>
+          <a href="#form-content">2. รูปทรงและเนื้อหา</a>
+          <a href="#elements">3. ทัศนธาตุ</a>
+          <a href="#line">4. จุดและเส้น</a>
+          <a href="#value">5. น้ำหนัก</a>
+          <a href="#color">6. สี</a>
+          <a href="#texture">7. ลักษณะผิว</a>
+          <a href="#space">8. ที่ว่าง</a>
+          <a href="#unity">9. เอกภาพ</a>
+          <a href="#web-examples">10. ภาพตัวอย่างจากเว็บ</a>
+          <a href="#full-text">11. ข้อความครบทุกหน้า</a>
+          <a href="#activity">12. กิจกรรมท้ายคาบ</a>
+        </div>
+      </aside>
+
+      <div>
+        <section id="meaning" class="section">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Pages 01-06</div>
+              <h2>ศิลปะคืออะไร</h2>
+            </div>
+            <div class="section-count">01</div>
+          </div>
+          <div class="section-body">
+            <div class="content-grid">
+              <div class="text-card">
+                <p><strong>ความหมายของศิลปะในยุคแรกเริ่ม</strong> ศิลปะ (Art) ในสมัยโบราณหมายถึงสิ่งที่มนุษย์สร้างขึ้น (Artifact) ไม่ใช่สิ่งที่เกิดขึ้นตามธรรมชาติ ดังนั้นตะวันตกดินที่งดงามหรือก้อนหินที่ถูกธรรมชาติกัดเซาะจนมีรูปร่างพิเศษจึงยังไม่ถือเป็นศิลปะ แต่บ้านเรือน เขื่อนกั้นน้ำ ภาพเขียน หรือหินที่มนุษย์สลักขึ้น ถือเป็นศิลปะ เพราะมนุษย์เป็นผู้สร้าง</p>
+                <p>ถ้าใช้เกณฑ์นี้ ศิลปะจึงมีความหมายกว้างมาก ครอบคลุมตั้งแต่งานจิตรกรรม ประติมากรรม เครื่องเรือน เครื่องจักรกล บ้านเมือง ไปจนถึงอาวุธยุทโธปกรณ์ มนุษย์ทำอะไรขึ้นมาก็นับเป็นศิลปะได้ ไม่ว่าจะดี ชั่ว สวยงาม น่าเกลียด สร้างสรรค์ หรือทำลายล้าง</p>
+                <p><strong>ความหมายของศิลปะในระยะหลัง</strong> มีคำว่า “วิจิตรศิลป์” (Fine Art) ใช้เรียกงานศิลปะที่ทำขึ้นเพื่อประเทืองปัญญาและอารมณ์ แยกออกจาก “ประยุกต์ศิลป์” (Applied Art) ซึ่งทำขึ้นเพื่อประโยชน์ใช้สอย ตั้งแต่ศตวรรษที่ 19 เป็นต้นมา สิ่งที่สร้างขึ้นเพื่อประโยชน์ใช้สอยเพียงอย่างเดียวมักถูกแยกเป็นอุตสาหกรรมศิลป์ นิเทศศิลป์ หรือมัณฑนศิลป์</p>
+                <p>ในความหมายที่แคบลง ศิลปะยังหมายถึงคุณภาพหรือคุณค่าทางศิลปะของผลงาน เช่น เมื่อกล่าวว่า “รูปนี้ไม่ใช่ศิลปะ” อาจหมายถึงรูปนั้นไม่มีคุณค่าเพียงพอทางศิลปะ หรือเมื่อกล่าวว่า “ประติมากรรมชิ้นนี้เป็นศิลปะที่แท้จริง” ก็หมายถึงงานนั้นมีคุณค่าทางศิลปะสูง</p>
+              </div>
+              <button class="visual-card" data-full="visual-elements-pages/page-02.jpg" data-caption="ความหมายของศิลปะในยุคแรกเริ่ม">
+                <img src="visual-elements-pages/page-02.jpg" alt="สไลด์ความหมายของศิลปะ">
+                <div class="visual-caption">ภาพจากสไลด์หน้า 2 <span>คลิกเพื่อขยาย</span></div>
+              </button>
+            </div>
+            <div class="feature-grid">
+              <div class="note-card"><h3>วิจิตรศิลป์</h3><p>ศิลปะที่สร้างขึ้นเพื่อให้ความรู้สึกทางสุนทรียภาพ ให้อารมณ์สะเทือนใจ ปลุกความเห็นแจ้ง ให้ประสบการณ์ใหม่ หรือประเทืองปัญญาแก่ผู้ชม</p></div>
+              <div class="note-card"><h3>ประยุกต์ศิลป์</h3><p>ศิลปะที่สร้างขึ้นเพื่อประโยชน์อย่างอื่นนอกเหนือจากความชื่นชมในคุณค่าทางศิลปะโดยตรง เช่น ลวดลายตกแต่งอาคาร เครื่องเรือน สีสันบนผลิตภัณฑ์ และเครื่องมือใช้สอยที่ทำอย่างประณีต</p></div>
+              <div class="note-card"><h3>รับสัมผัสอย่างไร</h3><p>ทัศนศิลป์รับด้วยการเห็น โสตศิลป์รับด้วยการฟัง และโสตทัศนศิลป์รับด้วยการเห็นและฟังพร้อมกัน เช่น นาฏกรรมและภาพยนตร์</p></div>
+            </div>
+            <div class="pill-row">
+              <span class="pill">จิตรกรรม</span><span class="pill">ประติมากรรม</span><span class="pill">สถาปัตยกรรม</span><span class="pill">วรรณกรรม</span><span class="pill">ดนตรีและนาฏกรรม</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="form-content" class="section">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Pages 07-12</div>
+              <h2>รูปทรงและเนื้อหา</h2>
+            </div>
+            <div class="section-count">02</div>
+          </div>
+          <div class="section-body">
+            <div class="content-grid">
+              <div class="text-card">
+                <p>ศิลปะคือสิ่งที่มนุษย์สร้างขึ้นเพื่อแสดงออกซึ่งอารมณ์ ความรู้สึก ความคิด หรือความงาม จึงมีองค์ประกอบสำคัญ 2 ส่วน คือ ส่วนที่เป็นโครงสร้างทางวัตถุที่มองเห็นหรือรับรู้ได้ด้วยประสาทสัมผัส เรียกว่า <strong>รูปทรง (form)</strong> และส่วนที่เป็นนามธรรม เรียกว่า <strong>เนื้อหา (Content)</strong></p>
+                <p>รูปทรงเปรียบเหมือนร่างกาย ส่วนเนื้อหาเปรียบเหมือนจิตใจ เนื้อหาเป็นโครงสร้างทางจิตที่เชื่อมโยงกับเรื่อง (Subject) และแนวเรื่อง (Theme) ทั้ง 3 ส่วนนี้สัมพันธ์และทับซ้อนกัน เรื่องกับเนื้อหาในบางงานอาจแยกกันไม่ออก แต่ในบางงานอาจแทบไม่เกี่ยวข้องกันเลย</p>
+                <p><strong>เรื่อง</strong> หมายถึงสิ่งที่ศิลปินเลือกมาเป็นจุดเริ่มต้นของการสร้างงาน เช่น คน สัตว์ สิ่งของ สถานที่ ศาสนา สถานการณ์ หรือสงคราม ถ้าพูดให้ง่ายคือ “ภาพนี้เกี่ยวกับอะไร” หรือ “ศิลปินต้องการเขียนหรือปั้นอะไร”</p>
+                <p>ศิลปะบางแบบไม่มีเรื่อง เรียกว่า Non-objective Art คือศิลปะที่ไม่แสดงหรือเป็นตัวแทนของสิ่งใดในธรรมชาติ เช่น ดนตรี และทัศนศิลป์บางประเภทอย่างศิลปะแบบนามธรรม</p>
+              </div>
+              <button class="visual-card" data-full="visual-elements-pages/page-07.jpg" data-caption="รูปทรง = ร่างกาย / เนื้อหา = จิตใจ">
+                <img src="visual-elements-pages/page-07.jpg" alt="องค์ประกอบของศิลปะ">
+                <div class="visual-caption">รูปทรงและเนื้อหา <span>คลิกเพื่อขยาย</span></div>
+              </button>
+            </div>
+            <div class="content-grid">
+              <button class="visual-card" data-full="visual-elements-pages/page-12.jpg" data-caption="Guernica: เรื่องและแนวเรื่อง">
+                <img src="visual-elements-pages/page-12.jpg" alt="ตัวอย่าง Guernica">
+                <div class="visual-caption">ตัวอย่าง Guernica <span>คลิกเพื่อขยาย</span></div>
+              </button>
+              <div class="text-card">
+                <p><strong>การตั้งชื่อผลงาน</strong> ชื่อของผลงาน (Title) เป็นคนละส่วนกับเรื่อง แต่โดยทั่วไปมักตั้งขึ้นตามเรื่องหรือเกี่ยวข้องกับเรื่อง เช่น Guernica ของปิกัสโซ ใช้ชื่อเมืองที่ถูกโจมตีในสงครามกลางเมืองสเปนมาเป็นชื่อผลงาน</p>
+                <p><strong>แนวเรื่อง</strong> มักเป็นความคิดหรือรูปทรงที่ยังไม่สมบูรณ์ เปลี่ยนแปลงได้ และเปิดไว้ให้พัฒนาต่อไป เปรียบเหมือนจุดหมายที่เลือนรางในการเดินทางของศิลปิน โดยมีเรื่องเป็นจุดเริ่มต้นและจิตใต้สำนึกเป็นตัวนำทาง</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="elements" class="section">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Pages 13-14</div>
+              <h2>ทัศนธาตุและจุด</h2>
+            </div>
+            <div class="section-count">03</div>
+          </div>
+          <div class="section-body">
+            <div class="content-grid">
+              <div class="text-card">
+                <p>ในการสร้างงานศิลปะชิ้นหนึ่ง อาจใช้ทัศนธาตุอย่างใดอย่างหนึ่งหรือหลายอย่างรวมกันก็ได้ แต่เมื่อใช้ทัศนธาตุหนึ่งสร้างรูปขึ้น ทัศนธาตุอื่น ๆ มักปรากฏตามมาด้วย เช่น ใช้เส้นสร้างรูปทรง ก็จะเกิดที่ว่างหรือรูปร่างของที่ว่างพร้อมกัน หรือใช้สีระบายลงบนแผ่นภาพ ก็จะเกิดเส้นที่เป็นขอบเขตของสี น้ำหนักอ่อนแก่ของสี ที่ว่างรอบบริเวณสี และลักษณะพื้นผิวของสีด้วย</p>
+                <p><strong>จุด (Point)</strong> เป็นทัศนธาตุเบื้องต้นที่สุดของการเห็น จุดมีมิติเป็นศูนย์ ไม่มีความกว้าง ความยาว หรือความลึก เป็นสิ่งที่เล็กที่สุดที่ใช้สร้างรูปทรงและสร้างพลังการเคลื่อนไหวของที่ว่างในภาพได้</p>
+              </div>
+              <button class="visual-card" data-full="visual-elements-pages/page-13.jpg" data-caption="ทัศนธาตุ (Visual elements)">
+                <img src="visual-elements-pages/page-13.jpg" alt="ทัศนธาตุ">
+                <div class="visual-caption">ทัศนธาตุ <span>คลิกเพื่อขยาย</span></div>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section id="line" class="section">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Pages 15-17, 39</div>
+              <h2>เส้นและความรู้สึก</h2>
+            </div>
+            <div class="section-count">04</div>
+          </div>
+          <div class="section-body">
+            <div class="content-grid">
+              <div class="text-card">
+                <p>หลักฐานทางประวัติศาสตร์บ่งบอกว่างานทัศนศิลป์ชิ้นแรก ๆ ของมนุษย์เริ่มจากเส้น เช่น ภาพเขียนผนังถ้ำ หรือการเริ่มทำงานศิลปะในวัยเด็กที่มักเริ่มจากการใช้เส้น เส้นเป็นแกนของทัศนศิลป์ทุกแขนง เป็นพื้นฐานของโครงสร้างของทุกสิ่งในจักรวาล และสามารถแสดงความรู้สึกได้ด้วยตัวเอง</p>
+                <ul>
+                  <li><strong>เส้นตรง</strong> ให้ความรู้สึกแข็งแรง แน่นอน ตรงไปตรงมา ไม่ประนีประนอม และเอาชนะ</li>
+                  <li><strong>เส้นโค้ง</strong> ให้ความรู้สึกสบาย เปลี่ยนแปลงได้ ลื่นไหล ต่อเนื่อง สุภาพนุ่ม แต่ถ้าใช้มากเกินไปอาจรู้สึกกังวล เรื่อยเฉื่อย และขาดจุดมุ่งหมาย</li>
+                  <li><strong>เส้นโค้งวงแคบ</strong> ให้ความรู้สึกเปลี่ยนทิศทางรวดเร็ว มีพลัง และเคลื่อนไหวรุนแรง</li>
+                  <li><strong>เส้นโค้งของวงกลม</strong> ให้ความรู้สึกเป็นระเบียบ ตายตัว และเปลี่ยนแปลงน้อย</li>
+                  <li><strong>เส้นโค้งก้นหอย</strong> ให้ความรู้สึกเคลื่อนไหว คลี่คลาย และเติบโตจากภายในออกมา</li>
+                  <li><strong>เส้นฟันปลา</strong> ให้จังหวะกระแทก เกร็ง ขัดแย้ง รุนแรง และเชื่อมโยงกับพลังหรือสงคราม</li>
+                </ul>
+              </div>
+              <button class="visual-card" data-full="visual-elements-pages/page-16.png" data-caption="ความรู้สึกที่เกิดจากลักษณะของเส้น">
+                <img src="visual-elements-pages/page-16.png" alt="ลักษณะของเส้น">
+                <div class="visual-caption">ลักษณะของเส้น <span>คลิกเพื่อขยาย</span></div>
+              </button>
+            </div>
+            <div class="content-grid">
+              <button class="visual-card" data-full="visual-elements-pages/page-39.jpg" data-caption="ตัวอย่างด้านเส้น">
+                <img src="visual-elements-pages/page-39.jpg" alt="ตัวอย่างเส้นในงานศิลปะ">
+                <div class="visual-caption">ตัวอย่างด้าน “เส้น” <span>คลิกเพื่อขยาย</span></div>
+              </button>
+              <div class="text-card">
+                <p><strong>เส้นโครงสร้าง (Structural Line)</strong> คือเส้นที่มองไม่เห็นด้วยตา เป็นเส้นในจินตนาการที่ผู้ดูรู้สึกหรือเชื่อมโยงจากจุดหนึ่งไปยังอีกจุดหนึ่ง เส้นชนิดนี้เดินทางด้วยความรู้สึก ไม่ใช่ด้วยการเห็น</p>
+                <p>พลังในงานศิลปะที่จะเคลื่อนไหวหรือหยุดนิ่ง ผ่อนคลายหรือตึงเครียด มักอยู่ที่เส้นโครงสร้างหรือเส้นภายในที่มองไม่เห็นนี้</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="value" class="section">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Pages 18-22</div>
+              <h2>น้ำหนัก</h2>
+            </div>
+            <div class="section-count">05</div>
+          </div>
+          <div class="section-body">
+            <div class="content-grid">
+              <div class="text-card">
+                <p>น้ำหนัก คือ ความอ่อนแก่ของบริเวณที่ถูกแสงสว่างและบริเวณที่เป็นเงาของวัตถุ หรือการระบายสีให้เกิดความอ่อนแก่ของค่าสีหนึ่งหรือหลายสีในระดับความเข้มต่าง ๆ</p>
+                <p>น้ำหนักที่ใช้ตามลักษณะแสงเงาในธรรมชาติจะทำให้เกิดปริมาตรของรูปทรง ให้ความแน่นแก่รูปทรง และก่อให้เกิดความรู้สึกทางอารมณ์จากการประสานความอ่อนแก่ในตัวมันเอง ในงานนามธรรม ผู้ชมอาจรับความรู้สึกจากน้ำหนักที่ประสานกันในภาพโดยตรง โดยไม่ต้องผ่านรูปทรงที่รู้จักได้</p>
+                <p><strong>คุณลักษณะของน้ำหนัก</strong></p>
+                <ul>
+                  <li>มี 2 มิติ คือ ความกว้างและความยาว</li>
+                  <li>มีทิศทาง</li>
+                  <li>มีลักษณะได้เช่นเดียวกับเส้น เช่น ยาว สั้น เป็นคลื่น</li>
+                  <li>มีรูปร่าง เช่น กลม เหลี่ยม อิสระ</li>
+                  <li>มีความอ่อนแก่</li>
+                  <li>มีลักษณะผิวต่าง ๆ</li>
+                </ul>
+              </div>
+              <button class="visual-card" data-full="visual-elements-pages/page-18.jpg" data-caption="น้ำหนัก">
+                <img src="visual-elements-pages/page-18.jpg" alt="น้ำหนักในงานศิลปะ">
+                <div class="visual-caption">น้ำหนักในงานศิลปะ <span>คลิกเพื่อขยาย</span></div>
+              </button>
+            </div>
+            <div class="feature-grid">
+              <div class="note-card"><h3>แยกรูปกับพื้น</h3><p>น้ำหนักช่วยให้เห็นความแตกต่างระหว่างรูปกับพื้น หรือรูปทรงกับที่ว่าง</p></div>
+              <div class="note-card"><h3>นำสายตา</h3><p>บริเวณที่น้ำหนักตัดกันจะดึงดูดความสนใจและนำสายตาผู้ดูให้เคลื่อนตามจังหวะที่กำหนด</p></div>
+              <div class="note-card"><h3>สร้างมิติ</h3><p>น้ำหนักทำให้รูปทรงดูเป็น 2 มิติ 3 มิติ เกิดความลึก และเกิดความรู้สึกประสานกันในภาพ</p></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="color" class="section">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Pages 23-32, 41</div>
+              <h2>สีและคู่สี</h2>
+            </div>
+            <div class="section-count">06</div>
+          </div>
+          <div class="section-body">
+            <div class="content-grid">
+              <div class="text-card">
+                <p>สีที่เราเห็นจากสายรุ้งบนท้องฟ้ามี 7 สี ได้แก่ ม่วง ม่วงน้ำเงิน น้ำเงิน เขียว เหลือง ส้ม และแดง เช่นเดียวกับการใช้แท่งแก้วสามเหลี่ยมปริซึมส่องกับแสงแดด แท่งแก้วจะแยกสีออกมาตามที่เราเห็นกับสีรุ้ง สีแดงมีความถี่ต่ำที่สุดและมีช่วงคลื่นยาวที่สุด ไล่ไปจนถึงสีม่วงที่มีความถี่สูงที่สุดและมีช่วงคลื่นสั้นที่สุด</p>
+                <p><strong>สีที่เป็นแสง (Spectrum)</strong> คือสีที่เกิดจากการหักเหของแสง ส่วน <strong>สีที่เป็นวัตถุ (Pigment)</strong> คือสีที่มีอยู่ในวัตถุธรรมชาติ เช่น พืช สัตว์ และแร่ธาตุ</p>
+                <p><strong>คู่สี (Complementary Colors)</strong> คือสีที่อยู่ตรงข้ามกันในวงสีธรรมชาติ ถ้านำมาวางเรียงกันจะให้ความสดใสและพลังความจัดของสีซึ่งกันและกัน ทำให้เกิดการขัดแย้งมาก บางครั้งเรียกว่า “สีตัดกันอย่างแท้จริง” เมื่อนำคู่สีมาผสมกันจะเป็นสีกลาง และเมื่อนำสีหนึ่งไปเจือในคู่สีของมันเล็กน้อยจะทำให้สีนั้นหม่นลง</p>
+              </div>
+              <button class="visual-card" data-full="visual-elements-pages/page-26.jpg" data-caption="คู่สี (Complementary Colors)">
+                <img src="visual-elements-pages/page-26.jpg" alt="คู่สี">
+                <div class="visual-caption">คู่สี <span>คลิกเพื่อขยาย</span></div>
+              </button>
+            </div>
+            <div id="gallery" class="gallery">
+              <button class="visual-card" data-full="visual-elements-pages/page-25.jpg" data-caption="วงล้อสี">
+                <img src="visual-elements-pages/page-25.jpg" alt="วงล้อสี">
+                <div class="visual-caption">วงล้อสี</div>
+              </button>
+              <button class="visual-card" data-full="visual-elements-pages/page-28.jpg" data-caption="ตัวอย่างการวิเคราะห์แสงและสี">
+                <img src="visual-elements-pages/page-28.jpg" alt="ตัวอย่างการวิเคราะห์แสงและสี">
+                <div class="visual-caption">แสงและสี</div>
+              </button>
+              <button class="visual-card" data-full="visual-elements-pages/page-41.jpg" data-caption="ตัวอย่างด้านสี">
+                <img src="visual-elements-pages/page-41.jpg" alt="ตัวอย่างด้านสี">
+                <div class="visual-caption">ตัวอย่างด้านสี</div>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section id="texture" class="section">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Page 33</div>
+              <h2>ลักษณะผิว</h2>
+            </div>
+            <div class="section-count">07</div>
+          </div>
+          <div class="section-body">
+            <div class="content-grid">
+              <div class="text-card">
+                <p>ลักษณะผิว (Texture) หมายถึงลักษณะของบริเวณพื้นผิวของสิ่งต่าง ๆ ที่เมื่อสัมผัสหรือเมื่อเห็นแล้วรู้สึกได้ว่าหยาบ ละเอียด มัน ด้าน ขรุขระ เป็นเส้น เป็นจุด หรือเป็นกำมะหยี่</p>
+                <ol>
+                  <li><strong>ลักษณะผิวที่จับต้องได้</strong> เช่น กระดาษทราย ผิวส้ม แก้ว ผิวไม้ เป็นต้น</li>
+                  <li><strong>ลักษณะผิวที่ทำเทียมขึ้น</strong> คือมองแล้วรู้สึกว่าหยาบหรือละเอียด แต่เมื่อสัมผัสจริงผิวกลับเรียบ เช่น วัตถุสังเคราะห์ที่ทำผิวเป็นลายไม้ ลายหิน หรือการใช้พู่กันในงานจิตรกรรมบางชิ้น</li>
+                </ol>
+              </div>
+              <button class="visual-card" data-full="visual-elements-pages/page-33.jpg" data-caption="ลักษณะผิว (Texture)">
+                <img src="visual-elements-pages/page-33.jpg" alt="ลักษณะผิว">
+                <div class="visual-caption">ลักษณะผิว <span>คลิกเพื่อขยาย</span></div>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section id="space" class="section">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Pages 34-37, 40</div>
+              <h2>ที่ว่าง</h2>
+            </div>
+            <div class="section-count">08</div>
+          </div>
+          <div class="section-body">
+            <div class="content-grid">
+              <div class="text-card">
+                <p>ที่ว่าง (Space) ตามปกติกว้างขวางจนหาขอบเขตไม่ได้ เป็นที่ที่สิ่งทั้งหลายดำรงอยู่ ที่ว่างเป็นทัศนธาตุที่มองไม่เห็น จะปรากฏตัวเมื่อมีทัศนธาตุอื่นมากำหนดรูปร่างขึ้นมา ที่ว่างจึงเป็นเหมือนสนามหรือเวทีที่ทัศนธาตุอื่น ๆ ลงไปแสดงหรือปรากฏตัวเป็นรูปทรง</p>
+                <p>จิตรกรรมซึ่งเป็นงาน 2 มิติ อาจทำให้เกิดภาพลวงตาเห็นเป็น 3 มิติได้ด้วยการใช้ทัศนธาตุต่าง ๆ ส่วนประติมากรรมใช้ที่ว่างจริงที่โอบล้อมและวิ่งรอบรูปทรง 3 มิติ สถาปัตยกรรมก็ใช้ที่ว่างจริงเช่นเดียวกัน</p>
+              </div>
+              <button class="visual-card" data-full="visual-elements-pages/page-34.jpg" data-caption="ที่ว่าง (Space)">
+                <img src="visual-elements-pages/page-34.jpg" alt="ที่ว่าง">
+                <div class="visual-caption">ที่ว่าง <span>คลิกเพื่อขยาย</span></div>
+              </button>
+            </div>
+            <div class="compare">
+              <div class="note-card"><h3>ความหมายของที่ว่าง 1-3</h3><p>ที่ว่างคือปริมาตรที่วัตถุหรือรูปทรงกินเนื้อที่อยู่ อากาศที่โอบรอบรูปทรง และระยะห่างระหว่างรูปทรง เช่น ช่องไฟระหว่างตัวอักษรหรือช่องไฟในลายไทย</p></div>
+              <div class="note-card"><h3>ความหมายของที่ว่าง 4-6</h3><p>ที่ว่างคือปริมาตรความว่างที่ถูกล้อมด้วยขอบเขต การแทนค่าความลึกบนระนาบ 2 มิติ และปฏิกิริยาระหว่างน้ำหนัก สี และรูปทรงที่ทำให้เกิดภาพลวงตา</p></div>
+            </div>
+            <button class="visual-card" data-full="visual-elements-pages/page-40.jpg" data-caption="ตัวอย่างด้านที่ว่างและจังหวะ">
+              <img src="visual-elements-pages/page-40.jpg" alt="ตัวอย่างด้านที่ว่างและจังหวะ">
+              <div class="visual-caption">ตัวอย่างด้าน “ที่ว่างและจังหวะ” <span>คลิกเพื่อขยาย</span></div>
+            </button>
+          </div>
+        </section>
+
+        <section id="unity" class="section">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Pages 38, 42-44</div>
+              <h2>เอกภาพทางทัศนศิลป์</h2>
+            </div>
+            <div class="section-count">09</div>
+          </div>
+          <div class="section-body">
+            <div class="content-grid">
+              <div class="text-card">
+                <p>การสร้างงานศิลปะ คือการนำทัศนธาตุต่าง ๆ มาประกอบกันให้เป็นรูปทรงที่มีเอกภาพ มีความสอดคล้องกับจุดมุ่งหมายของการแสดงออก และประกอบด้วยความสมดุลของการขัดแย้ง การซ้ำ การประสาน จุดเด่น การเปลี่ยนแปลงของทัศนธาตุต่าง ๆ รวมทั้งสัดส่วนและจังหวะที่เหมาะสม</p>
+                <p>ศิลปินอาจใช้ทัศนธาตุเพียงอย่างเดียวก็ได้ แต่โดยปกติมักใช้หลายอย่างร่วมกัน โดยบางธาตุเป็นจุดเด่นและบางธาตุเป็นจุดรอง เช่น ใช้สีเป็นส่วนเด่น ใช้น้ำหนักเป็นรอง หรือใช้เส้นเป็นเด่นและสีเป็นรอง</p>
+              </div>
+              <button class="visual-card" data-full="visual-elements-pages/page-38.jpg" data-caption="เอกภาพทางทัศนศิลป์">
+                <img src="visual-elements-pages/page-38.jpg" alt="เอกภาพทางทัศนศิลป์">
+                <div class="visual-caption">เอกภาพทางทัศนศิลป์ <span>คลิกเพื่อขยาย</span></div>
+              </button>
+            </div>
+            <div class="gallery">
+              <button class="visual-card tall" data-full="visual-elements-pages/page-42.jpg" data-caption="ตัวอย่างภาพประกอบ Anubis">
+                <img src="visual-elements-pages/page-42.jpg" alt="ภาพ Anubis">
+                <div class="visual-caption">Anubis</div>
+              </button>
+              <button class="visual-card tall" data-full="visual-elements-pages/page-43.jpg" data-caption="ตัวอย่างลายไทยผสมอียิปต์">
+                <img src="visual-elements-pages/page-43.jpg" alt="ลายไทยผสมอียิปต์">
+                <div class="visual-caption">เส้น สี รูปทรง</div>
+              </button>
+              <button class="visual-card tall" data-full="visual-elements-pages/page-44.jpg" data-caption="ตัวอย่างลายนูนและลักษณะผิว">
+                <img src="visual-elements-pages/page-44.jpg" alt="ลายนูนและลักษณะผิว">
+                <div class="visual-caption">ลักษณะผิว</div>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <div class="quote-band">
+          <h2>อ่านภาพให้เป็น เห็นทัศนธาตุให้ชัด</h2>
+          <p>เมื่อมองงานศิลปะ ให้ลองถามว่าเราเห็นจุด เส้น น้ำหนัก สี ผิว และที่ว่างทำงานร่วมกันอย่างไร สิ่งเหล่านี้คือภาษาที่ทำให้งานมีอารมณ์ ความหมาย และเอกภาพ</p>
+        </div>
+
+        <section id="web-examples" class="section">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Online References</div>
+              <h2>ภาพตัวอย่างจากเว็บ</h2>
+            </div>
+            <div class="section-count">11</div>
+          </div>
+          <div class="section-body">
+            <div class="text-card">
+              <p>ภาพชุดนี้ใช้ต่อยอดจากสไลด์ เพื่อให้นักเรียนเห็นตัวอย่างจากผลงานศิลปะจริงหลายแนว ครูสามารถชวนดูทีละภาพแล้วถามว่า “ทัศนธาตุใดเด่นที่สุด และส่งผลต่อความรู้สึกอย่างไร”</p>
+            </div>
+            <div class="web-gallery">
+              <button class="visual-card" data-full="https://commons.wikimedia.org/wiki/Special:Redirect/file/A_Sunday_on_La_Grande_Jatte%2C_Georges_Seurat%2C_1884.jpg" data-caption="จุด: Georges Seurat ใช้จุดสีจำนวนมากสร้างภาพและแสง">
+                <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/A_Sunday_on_La_Grande_Jatte%2C_Georges_Seurat%2C_1884.jpg" alt="A Sunday Afternoon on the Island of La Grande Jatte โดย Georges Seurat">
+                <div class="visual-caption"><span class="caption-stack">จุด <small>Seurat: จุดสีรวมกันเป็นภาพ</small></span></div>
+              </button>
+              <button class="visual-card" data-full="https://commons.wikimedia.org/wiki/Special:Redirect/file/Wassily%20Kandinsky%20Composition%20VIII.jpg" data-caption="เส้นและรูปทรง: Kandinsky ใช้เส้นเรขาคณิตสร้างจังหวะและความเคลื่อนไหว">
+                <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Wassily%20Kandinsky%20Composition%20VIII.jpg" alt="Composition VIII โดย Wassily Kandinsky">
+                <div class="visual-caption"><span class="caption-stack">เส้น / รูปทรง <small>Kandinsky: เส้นสร้างจังหวะ</small></span></div>
+              </button>
+              <button class="visual-card" data-full="https://commons.wikimedia.org/wiki/Special:Redirect/file/Caravaggio_%E2%80%94_The_Calling_of_Saint_Matthew.jpg" data-caption="น้ำหนัก: Caravaggio ใช้แสงเงาตัดกันแรงเพื่อดึงสายตาและเพิ่มอารมณ์">
+                <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Caravaggio_%E2%80%94_The_Calling_of_Saint_Matthew.jpg" alt="The Calling of Saint Matthew โดย Caravaggio">
+                <div class="visual-caption"><span class="caption-stack">น้ำหนัก <small>Caravaggio: แสงเงานำสายตา</small></span></div>
+              </button>
+              <button class="visual-card" data-full="https://commons.wikimedia.org/wiki/Special:Redirect/file/The_Night_Watch.jpg" data-caption="น้ำหนักและจุดเด่น: Rembrandt ใช้น้ำหนักและแสงเพื่อเน้นตัวละครหลัก">
+                <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/The_Night_Watch.jpg" alt="The Night Watch โดย Rembrandt">
+                <div class="visual-caption"><span class="caption-stack">น้ำหนัก / จุดเด่น <small>Rembrandt: แสงกำหนดบทบาท</small></span></div>
+              </button>
+              <button class="visual-card" data-full="https://commons.wikimedia.org/wiki/Special:Redirect/file/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" data-caption="สี เส้น และลักษณะผิว: Van Gogh ใช้สีและรอยพู่กันให้ภาพมีพลังเคลื่อนไหว">
+                <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" alt="The Starry Night โดย Vincent van Gogh">
+                <div class="visual-caption"><span class="caption-stack">สี / ลักษณะผิว <small>Van Gogh: รอยพู่กันมีพลัง</small></span></div>
+              </button>
+              <button class="visual-card" data-full="https://commons.wikimedia.org/wiki/Special:Redirect/file/Claude_Monet_Water_Lilies_1908.jpg" data-caption="สีและบรรยากาศ: Monet ใช้สีและน้ำหนักนุ่มเพื่อสร้างบรรยากาศของแสง">
+                <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Claude_Monet_Water_Lilies_1908.jpg" alt="Water Lilies โดย Claude Monet">
+                <div class="visual-caption"><span class="caption-stack">สี / บรรยากาศ <small>Monet: สีสร้างความนุ่ม</small></span></div>
+              </button>
+              <button class="visual-card" data-full="https://commons.wikimedia.org/wiki/Special:Redirect/file/Great_Wave_off_Kanagawa.jpg" data-caption="เส้นและที่ว่าง: Hokusai ใช้เส้นโค้งของคลื่นและพื้นที่ว่างรอบภูเขาไฟฟูจิให้เกิดจังหวะ">
+                <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Great_Wave_off_Kanagawa.jpg" alt="The Great Wave off Kanagawa โดย Hokusai">
+                <div class="visual-caption"><span class="caption-stack">เส้น / ที่ว่าง <small>Hokusai: เส้นโค้งและจังหวะ</small></span></div>
+              </button>
+              <button class="visual-card" data-full="https://commons.wikimedia.org/wiki/Special:Redirect/file/Mondrian_-_Composition_in_Red%2C_Blue%2C_and_Yellow%2C_1937-42.jpg" data-caption="ที่ว่าง สี และเอกภาพ: Mondrian ใช้เส้นตรง สีหลัก และช่องว่างให้เกิดสมดุล">
+                <img src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Mondrian_-_Composition_in_Red%2C_Blue%2C_and_Yellow%2C_1937-42.jpg" alt="Composition in Red, Blue, and Yellow โดย Piet Mondrian">
+                <div class="visual-caption"><span class="caption-stack">ที่ว่าง / เอกภาพ <small>Mondrian: สมดุลจากเส้นและสี</small></span></div>
+              </button>
+            </div>
+            <div class="activity-card">
+              <h3>คำถามชวนดูภาพ</h3>
+              <p>เลือกภาพจากแกลเลอรี 1 ภาพ แล้วตอบว่า ทัศนธาตุใดเด่นที่สุด หลักฐานที่เห็นคืออะไร และถ้าเปลี่ยนสีหรือแสงเงา อารมณ์ของภาพจะเปลี่ยนอย่างไร</p>
+            </div>
+            <div class="source-list">
+              <a href="https://commons.wikimedia.org/wiki/File:A_Sunday_on_La_Grande_Jatte,_Georges_Seurat,_1884.jpg" target="_blank" rel="noreferrer">Seurat</a>
+              <a href="https://commons.wikimedia.org/wiki/Category:Composition_VIII_-_Wassily_Kandinsky" target="_blank" rel="noreferrer">Kandinsky</a>
+              <a href="https://commons.wikimedia.org/wiki/File:Caravaggio_%E2%80%94_The_Calling_of_Saint_Matthew.jpg" target="_blank" rel="noreferrer">Caravaggio</a>
+              <a href="https://commons.wikimedia.org/wiki/File:The_Night_Watch.jpg" target="_blank" rel="noreferrer">Rembrandt</a>
+              <a href="https://commons.wikimedia.org/wiki/File:Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg" target="_blank" rel="noreferrer">Van Gogh</a>
+              <a href="https://commons.wikimedia.org/wiki/File:Claude_Monet_Water_Lilies_1908.jpg" target="_blank" rel="noreferrer">Monet</a>
+              <a href="https://commons.wikimedia.org/wiki/File:Great_Wave_off_Kanagawa.jpg" target="_blank" rel="noreferrer">Hokusai</a>
+              <a href="https://commons.wikimedia.org/wiki/File:Mondrian_-_Composition_in_Red,_Blue,_and_Yellow,_1937-42.jpg" target="_blank" rel="noreferrer">Mondrian</a>
+            </div>
+          </div>
+        </section>
+
+        <section id="full-text" class="section">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Full Transcription</div>
+              <h2>ข้อความจาก PDF ครบทุกหน้า</h2>
+            </div>
+            <div class="section-count">10</div>
+          </div>
+          <div class="section-body">
+            <div class="text-card">
+              <p>ส่วนนี้เป็นข้อความที่ถอดจาก PDF เรียงตามหน้า 1-44 สำหรับครูใช้ตรวจ เทียบ หรือคัดลอกต่อได้ โดยเนื้อหาด้านบนเป็นเวอร์ชันจัดบทเรียนให้อ่านและสอนง่ายขึ้น</p>
+            </div>
+            <iframe class="full-text-frame" src="visual-elements-01-transcription.txt" title="ข้อความถอดจาก PDF ทัศนธาตุ 01"></iframe>
+          </div>
+        </section>
+
+        <section id="activity" class="section">
+          <div class="section-head">
+            <div>
+              <div class="section-kicker">Class Activity</div>
+              <h2>กิจกรรมท้ายคาบ</h2>
+            </div>
+            <div class="section-count">12</div>
+          </div>
+          <div class="section-body">
+            <div class="activity-card">
+              <h3>ภารกิจ: วิเคราะห์ทัศนธาตุจากภาพ</h3>
+              <p>ให้นักเรียนเลือกภาพตัวอย่างในเว็บ 1 ภาพ แล้วตอบลงสมุด โดยใช้คำถามต่อไปนี้</p>
+              <ol>
+                <li>ภาพนี้ใช้ทัศนธาตุใดเด่นที่สุด ระหว่าง เส้น สี น้ำหนัก ลักษณะผิว หรือที่ว่าง</li>
+                <li>ทัศนธาตุที่เด่นที่สุดทำให้ภาพเกิดอารมณ์หรือความรู้สึกแบบใด</li>
+                <li>ภาพมีจุดเด่นอยู่ตรงไหน และมีอะไรช่วยนำสายตาไปยังจุดนั้น</li>
+                <li>ถ้าปรับสีหรือน้ำหนักในภาพนี้ ภาพจะเปลี่ยนความรู้สึกอย่างไร</li>
+                <li>สรุปเป็น 3 บรรทัดว่า “ทัศนธาตุช่วยทำให้งานศิลปะมีความหมายอย่างไร”</li>
+              </ol>
+              <details>
+                <summary>แนวคำตอบสำหรับครู</summary>
+                <p>นักเรียนควรระบุทัศนธาตุได้ชัด อธิบายผลทางอารมณ์ได้ และเชื่อมโยงองค์ประกอบในภาพกับคำศัพท์ เช่น จุดเด่น จังหวะ สมดุล คู่สี น้ำหนัก และที่ว่าง</p>
+              </details>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal" id="imageModal" aria-hidden="true">
+    <div class="modal-inner">
+      <img id="modalImage" src="" alt="">
+      <div class="modal-bar">
+        <span id="modalCaption">ภาพประกอบ</span>
+        <button class="close" id="closeModal" aria-label="ปิด">×</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalCaption = document.getElementById('modalCaption');
+    const closeModal = document.getElementById('closeModal');
+
+    document.querySelectorAll('[data-full]').forEach((button) => {
+      button.addEventListener('click', () => {
+        modalImage.src = button.dataset.full;
+        modalImage.alt = button.dataset.caption || 'ภาพประกอบ';
+        modalCaption.textContent = button.dataset.caption || 'ภาพประกอบ';
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    function hideModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      modalImage.src = '';
+    }
+
+    closeModal.addEventListener('click', hideModal);
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) hideModal();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') hideModal();
+    });
+  </script>
+</body>
+</html>
